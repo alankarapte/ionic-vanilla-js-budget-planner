@@ -13,6 +13,9 @@ bttnExpenseAdd.addEventListener("click", () => {
     const reason = inputExpenseReason.value;
     const amount = inputExpenseAmount.value;
 
+    lblExpenseReason.removeAttribute("color", "danger");
+    lblExpenseAmount.removeAttribute("color", "danger");
+
     let isValid = true;
 
     if (reason.trim().length <= 0) {
