@@ -39,6 +39,8 @@ bttnExpenseAdd.addEventListener("click", () => {
         `;
         listExpenses.insertBefore(convertHTMLStringToElement(ionItemTemplate), listExpenses.firstChild);
 
+        presentToast("Expense added successfully!");
+
         clearExpenseCard();
 
         console.log("reason: " + reason + ", amount: " + amount);
@@ -115,4 +117,14 @@ async function presentAlert(header, subtitle, msg) {
 
     document.body.appendChild(alert);
     await alert.present();
+}
+
+async function presentToast(msg) {
+    const toast = document.createElement('ion-toast');
+    toast.message = msg;
+    toast.duration = 2000;
+    toast.color = "secondary";
+
+    document.body.appendChild(toast);
+    await toast.present();
 }
