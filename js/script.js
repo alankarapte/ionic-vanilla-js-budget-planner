@@ -1,10 +1,14 @@
-let inputExpenseReason = document.querySelector("#input-expense-reason");
-let inputExpenseAmount = document.querySelector("#input-expense-amount");
+let itemExpenseReason = document.querySelector("#item-expense-reason");
+let itemExpenseAmount = document.querySelector("#item-expense-amount");
+
+let inputExpenseReason = document.querySelector("#item-expense-reason ion-input");
+let inputExpenseAmount = document.querySelector("#item-expense-amount ion-input");
+
+let lblExpenseReason = document.querySelector("#item-expense-reason ion-label");
+let lblExpenseAmount = document.querySelector("#item-expense-amount ion-label");
+
 let bttnExpenseClear = document.querySelector("#bttn-expense-clear");
 let bttnExpenseAdd = document.querySelector("#bttn-expense-add");
-
-let lblExpenseReason = document.querySelector("#lbl-expense-reason");
-let lblExpenseAmount = document.querySelector("#lbl-expense-amount");
 
 let listExpenses = document.querySelector("#list-expenses");
 
@@ -18,21 +22,10 @@ bttnExpenseAdd.addEventListener("click", () => {
 
     let isValid = true;
 
-    if (reason.trim().length <= 0) {
-        console.warn("invalid reason");
-        lblExpenseReason.setAttribute("color", "danger");
-        isValid = false;
-    }
-
-    if (amount.trim().length <= 0 || amount <= 0) {
-        console.warn("invalid amount");
-        lblExpenseAmount.setAttribute("color", "danger");
-        isValid = false;
-    }
+    isValid = validateReason();
+    isValid = validateAmount();
 
     if (isValid) {
-        lblExpenseReason.removeAttribute("color", "danger");
-        lblExpenseAmount.removeAttribute("color", "danger");
 
         let ionItemEl = document.createElement("ion-item");
         let ionItemTemplate = `
@@ -55,6 +48,45 @@ bttnExpenseAdd.addEventListener("click", () => {
 });
 
 bttnExpenseClear.addEventListener("click", clearExpenseCard);
+
+inputExpenseReason.addEventListener("keyup", () => {
+    validateReason();
+});
+
+inputExpenseAmount.addEventListener("keyup", () => {
+    validateAmount();
+});
+
+function validateReason() {
+    if (inputExpenseReason.value.trim().length <= 0) {
+        console.warn("invalid reason");
+        lblExpenseReason.setAttribute("color", "danger");
+        itemExpenseReason.classList.add("ion-invalid");
+        return false;
+    } else {
+        console.warn("valid reason");
+        lblExpenseReason.removeAttribute("color", "danger");
+        itemExpenseReason.classList.remove("ion-invalid");
+        itemExpenseReason.classList.add("ion-valid");
+        return true;
+    }
+}
+
+function validateAmount() {
+    if (inputExpenseAmount.value.trim().length <= 0 || inputExpenseAmount.value <= 0) {
+        console.warn("invalid amount");
+        lblExpenseAmount.setAttribute("color", "danger");
+        itemExpenseAmount.classList.add("ion-invalid");
+        return false;
+    } else {
+        lblExpenseAmount.removeAttribute("color", "danger");
+        itemExpenseAmount.classList.remove("ion-invalid");
+        itemExpenseAmount.classList.add("ion-valid");
+
+        return true;
+    }
+}
+
 
 function convertHTMLStringToElement(htmlString) {
     //converting HTML element string to HTML element object

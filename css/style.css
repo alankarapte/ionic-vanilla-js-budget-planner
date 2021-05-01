@@ -1,0 +1,4 @@
+ion-item {
+  --highlight-color-invalid: #eb445a;
+  --highlight-color-valid: #3880ff;
+}
