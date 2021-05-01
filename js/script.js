@@ -46,6 +46,8 @@ bttnExpenseAdd.addEventListener("click", () => {
         clearExpenseCard();
 
         console.log("reason: " + reason + ", amount: " + amount);
+    } else {
+        presentAlert("Oops!", "invalid input!", "pls fill valid reason & amount.")
     }
 });
 
@@ -66,4 +68,16 @@ function clearExpenseCard() {
 
     inputExpenseReason.value = "";
     inputExpenseAmount.value = "";
+}
+
+async function presentAlert(header, subtitle, msg) {
+    const alert = document.createElement('ion-alert');
+    // alert.cssClass = 'my-custom-class';
+    alert.header = header;
+    alert.subHeader = subtitle;
+    alert.message = msg;
+    alert.buttons = ['OK'];
+
+    document.body.appendChild(alert);
+    await alert.present();
 }
