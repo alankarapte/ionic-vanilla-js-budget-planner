@@ -6,15 +6,7 @@ let bttnExpenseAdd = document.querySelector("#bttn-expense-add");
 let lblExpenseReason = document.querySelector("#lbl-expense-reason");
 let lblExpenseAmount = document.querySelector("#lbl-expense-amount");
 
-bttnExpenseClear.addEventListener("click", () => {
-    console.log("clear clicked");
-
-    lblExpenseReason.removeAttribute("color", "danger");
-    lblExpenseAmount.removeAttribute("color", "danger");
-
-    inputExpenseReason.value = "";
-    inputExpenseAmount.value = "";
-});
+let listExpenses = document.querySelector("#list-expenses");
 
 bttnExpenseAdd.addEventListener("click", () => {
     console.log("add clicked");
@@ -39,6 +31,36 @@ bttnExpenseAdd.addEventListener("click", () => {
         lblExpenseReason.removeAttribute("color", "danger");
         lblExpenseAmount.removeAttribute("color", "danger");
 
+        let ionItemEl = document.createElement("ion-item");
+        let ionItemTemplate = `
+        <ion-item>
+            <ion-label>${reason}</ion-label>
+            <ion-label slot="end" class="ion-text-right">${amount}</ion-label>
+        </ion-item>
+        `;
+        listExpenses.insertBefore(convertHTMLStringToElement(ionItemTemplate), listExpenses.firstChild);
+
+        clearExpenseCard();
+
         console.log("reason: " + reason + ", amount: " + amount);
     }
 });
+
+bttnExpenseClear.addEventListener("click", clearExpenseCard);
+
+function convertHTMLStringToElement(htmlString) {
+    //converting HTML element string to HTML element object
+    let divEl = document.createElement("div");
+    divEl.innerHTML = htmlString;
+    return divEl.firstElementChild;
+}
+
+function clearExpenseCard() {
+    console.log("clearing expense card");
+
+    lblExpenseReason.removeAttribute("color", "danger");
+    lblExpenseAmount.removeAttribute("color", "danger");
+
+    inputExpenseReason.value = "";
+    inputExpenseAmount.value = "";
+}
