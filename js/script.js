@@ -35,7 +35,10 @@ bttnExpenseAdd.addEventListener("click", () => {
         let ionItemTemplate = `
         <ion-item>
             <ion-label>${reason}</ion-label>
-            <ion-label slot="end" class="ion-text-right">${amount}</ion-label>
+            <ion-label slot="end" class="ion-text-right">
+                ${amount}
+                <ion-icon name="wallet-outline" size="small"></ion-icon>
+            </ion-label>
         </ion-item>
         `;
         listExpenses.insertBefore(convertHTMLStringToElement(ionItemTemplate), listExpenses.firstChild);
