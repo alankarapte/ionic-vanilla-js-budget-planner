@@ -1,4 +1,23 @@
+#logo {
+  height: 2.5em;
+  width: 2.5em;
+}
+
 ion-item {
   --highlight-color-invalid: #eb445a;
   --highlight-color-valid: #3880ff;
+}
+
+ion-content {
+  --background: linear-gradient(
+    to right,
+    rgba(255, 0, 0, 0.1),
+    rgba(0, 17, 255, 0.1)
+  );
+}
+
+ion-card,
+ion-list,
+ion-item {
+  --background: rgba(255, 255, 255, 0.3);
 }

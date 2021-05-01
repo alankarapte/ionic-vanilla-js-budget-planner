@@ -37,6 +37,7 @@ bttnExpenseAdd.addEventListener("click", () => {
             </ion-label>
         </ion-item>
         `;
+        listExpenses.hidden = false;
         listExpenses.insertBefore(convertHTMLStringToElement(ionItemTemplate), listExpenses.firstChild);
 
         presentToast("Expense added successfully!");
